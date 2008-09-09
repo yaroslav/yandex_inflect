@@ -4,8 +4,8 @@ Yandex.Inflect webservice client (provides Russian language pluralization)
 
 Клиент сервиса Яндекс.Склонятор (склонение слов на русском языке)
 
-* {http://nano.yandex.ru/project/inflect/}[http://nano.yandex.ru/project/inflect/]
-* {http://nano.yandex.ru/post/27/}[http://nano.yandex.ru/post/27/]
+* http://nano.yandex.ru/project/inflect/
+* http://nano.yandex.ru/post/27/
 
 == Установка
 
@@ -30,4 +30,4 @@ Yandex.Inflect webservice client (provides Russian language pluralization)
 
 == Автор
 
-* Ярослав Маркин <{yaroslav@markin.net}[yaroslav@markin.net]>
+* Ярослав Маркин <yaroslav@markin.net>
