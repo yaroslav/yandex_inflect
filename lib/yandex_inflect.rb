@@ -59,7 +59,7 @@ module YandexInflect
     inflections
   end
   
-  # Очистить кешcach
+  # Очистить кеш
   def self.clear_cache
     @@cache.clear
   end
