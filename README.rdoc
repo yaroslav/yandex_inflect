@@ -14,10 +14,6 @@ Yandex.Inflect webservice client (provides Russian language pluralization)
   gem sources -a http://gems.github.com
   gem install yaroslav-yandex_inflect
   
-или (репозиторий RubyForge)
-
-  gem install yandex_inflect
-
 == Использование
 
   > YandexInflect.inflections("рубин")
