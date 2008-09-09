@@ -24,6 +24,10 @@ Yandex.Inflect webservice client (provides Russian language pluralization)
   
 Если во время общения с веб-сервисом произошла ошибка, возвращается массив, забитый оригинальной строкой.
 
+Успешные ответы от веб-сервиса кешируются, кеш можно очистить с помощью
+
+  > YandexInflect.clear_cache
+
 == Автор
 
 * Ярослав Маркин <yaroslav@markin.net>

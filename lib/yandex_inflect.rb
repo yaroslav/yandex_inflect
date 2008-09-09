@@ -25,6 +25,9 @@ module YandexInflect
     end
   end
   
+  # Кеширование успешных результатов запроса к веб-сервису
+  @@cache = {}
+  
   # Возвращает массив склонений (размером <tt>INFLECTIONS_COUNT</tt>) для слова <tt>word</tt>.
   #
   # Если слово не найдено в словаре, будет возвращен массив размерностью <tt>INFLECTIONS_COUNT</tt>,
@@ -32,21 +35,41 @@ module YandexInflect
   def self.inflections(word)
     inflections = []
     
-    # Забиваем варианты склонений оригиналом если поднято исключение
-    get = Inflection.new.get(word) rescue word
+    # TODO ugly
+    lookup = cache_lookup(word) 
+    return lookup if lookup
     
-    if get.is_a?(Array)
-      # Если Яндекс вернул массив склонений
-      inflections = get
-    elsif get.is_a?(String)
-      # Если Яндекс не вернул массива склонений (слово не найдено в словаре),
-      # а только строку, то забиваем этой строкой весь массив 
-      inflections.fill(get, 0..INFLECTIONS_COUNT-1)
-    else
-      # Забиваем варианты склонений оригиналом
-      inflections.fill(word, 0..INFLECTIONS_COUNT-1)
+    get = Inflection.new.get(word) rescue nil # если поднято исключение, переходим к третьему варианту и не кешируем
+    case get
+      when Array then 
+        # Яндекс вернул массив склонений
+        inflections = get
+        # Кладем в кеш
+        cache_store(word, inflections)
+      when String then 
+        # Яндекс не вернул массива склонений (слово не найдено в словаре),
+        # а только строку, то забиваем этой строкой весь массив 
+        inflections.fill(get, 0..INFLECTIONS_COUNT-1)
+        # Кладем в кеш
+        cache_store(word, inflections)
+      else
+        # Забиваем варианты склонений оригиналом
+        inflections.fill(word, 0..INFLECTIONS_COUNT-1)
     end
-    
+ 
     inflections
   end
+  
+  def self.clear_cache
+    @@cache.clear
+  end
+  
+  private
+    def self.cache_lookup(word)
+      @@cache[word.to_s]
+    end
+  
+    def self.cache_store(word, value)
+      @@cache[word.to_s] = value
+    end
 end

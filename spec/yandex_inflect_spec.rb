@@ -7,6 +7,7 @@ describe YandexInflect do
   
   before(:each) do
     @inflection = mock(:inflection)
+    YandexInflect::clear_cache
   end
 
   it "should return an array of inflections when webservice returns an array" do
@@ -25,6 +26,39 @@ describe YandexInflect do
     @inflection.stub!(:get).and_return(nil)
     YandexInflect::Inflection.should_receive(:new).and_return(@inflection)
     YandexInflect.inflections("рубин").should == %w(рубин рубин рубин рубин рубин рубин)
+  end
+end
+
+describe YandexInflect, "with caching" do
+  before(:each) do
+    @inflection = mock(:inflection)
+    YandexInflect::clear_cache
+  end
+
+  it "should cache successful lookups" do
+    sample = ["рубин", "рубина", "рубину", "рубин", "рубином", "рубине"]
+    @inflection.stub!(:get).and_return(sample)
+    YandexInflect::Inflection.should_receive(:new).once.and_return(@inflection)
+    
+    2.times { YandexInflect.inflections("рубин") }
+  end
+  
+  it "should NOT cache unseccussful lookups" do
+    sample = nil
+    @inflection.stub!(:get).and_return(sample)
+    YandexInflect::Inflection.should_receive(:new).twice.and_return(@inflection)
+    
+    2.times { YandexInflect.inflections("рубин") }
+  end
+  
+  it "should allow to clear cache" do
+    sample = "рубин"
+    @inflection.stub!(:get).and_return(sample)
+    YandexInflect::Inflection.should_receive(:new).twice.and_return(@inflection)
+    
+    YandexInflect.inflections("рубин")
+    YandexInflect.clear_cache
+    YandexInflect.inflections("рубин")
   end
 end
 
