@@ -35,7 +35,6 @@ module YandexInflect
   def self.inflections(word)
     inflections = []
     
-    # TODO ugly
     lookup = cache_lookup(word) 
     return lookup if lookup
     
@@ -47,8 +46,8 @@ module YandexInflect
         # Кладем в кеш
         cache_store(word, inflections)
       when String then 
-        # Яндекс не вернул массива склонений (слово не найдено в словаре),
-        # а только строку, то забиваем этой строкой весь массив 
+        # Яндекс вернул не массив склонений (слово не найдено в словаре),
+        # а только строку, забиваем этой строкой весь массив 
         inflections.fill(get, 0..INFLECTIONS_COUNT-1)
         # Кладем в кеш
         cache_store(word, inflections)
@@ -60,6 +59,7 @@ module YandexInflect
     inflections
   end
   
+  # Очистить кешcach
   def self.clear_cache
     @@cache.clear
   end
