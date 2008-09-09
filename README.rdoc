@@ -1,0 +1,32 @@
+= YandexInflect
+
+Yandex.Inflect webservice client (provides Russian language pluralization)
+
+Клиент сервиса Яндекс.Склонятор (склонение слов на русском языке)
+
+* http://nano.yandex.ru/project/inflect/
+* http://nano.yandex.ru/post/27/
+
+== Установка
+
+Установка в качестве gem с GitHub:
+
+  gem sources -a http://gems.github.com
+  gem install yaroslav-yandex_inflect
+  
+или (репозиторий RubyForge)
+
+  gem install yandex_inflect
+
+== Использование
+
+  > YandexInflect.inflections("рубин")
+  => ["рубин", "рубина", "рубину", "рубин", "рубином", "рубине"]
+  > YandexInflect.inflections("ЭтогоСловаНетВСловаре")
+  => ["ЭтогоСловаНетВСловаре", "ЭтогоСловаНетВСловаре", "ЭтогоСловаНетВСловаре", "ЭтогоСловаНетВСловаре", "ЭтогоСловаНетВСловаре", "ЭтогоСловаНетВСловаре"]
+  
+Если во время общения с веб-сервисом произошла ошибка, возвращается массив, забитый оригинальной строкой.
+
+== Автор
+
+* Ярослав Маркин <yaroslav@markin.net>
