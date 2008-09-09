@@ -4,8 +4,8 @@ Yandex.Inflect webservice client (provides Russian language pluralization)
 
 Клиент сервиса Яндекс.Склонятор (склонение слов на русском языке)
 
-* http://nano.yandex.ru/project/inflect/
-* http://nano.yandex.ru/post/27/
+* http://nano.yandex.ru/project/inflect/[http://nano.yandex.ru/project/inflect/]
+* http://nano.yandex.ru/post/27/[http://nano.yandex.ru/post/27/]
 
 == Установка
 
@@ -23,10 +23,11 @@ Yandex.Inflect webservice client (provides Russian language pluralization)
   > YandexInflect.inflections("рубин")
   => ["рубин", "рубина", "рубину", "рубин", "рубином", "рубине"]
   > YandexInflect.inflections("ЭтогоСловаНетВСловаре")
-  => ["ЭтогоСловаНетВСловаре", "ЭтогоСловаНетВСловаре", "ЭтогоСловаНетВСловаре", "ЭтогоСловаНетВСловаре", "ЭтогоСловаНетВСловаре", "ЭтогоСловаНетВСловаре"]
+  => ["ЭтогоСловаНетВСловаре", "ЭтогоСловаНетВСловаре", "ЭтогоСловаНетВСловаре", 
+      "ЭтогоСловаНетВСловаре", "ЭтогоСловаНетВСловаре", "ЭтогоСловаНетВСловаре"]
   
 Если во время общения с веб-сервисом произошла ошибка, возвращается массив, забитый оригинальной строкой.
 
 == Автор
 
-* Ярослав Маркин <yaroslav@markin.net>
+* Ярослав Маркин <{yaroslav@markin.net}[mailto:yaroslav@markin.net]>
