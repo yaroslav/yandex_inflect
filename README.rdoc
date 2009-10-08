@@ -9,10 +9,9 @@ Yandex.Inflect webservice client (provides Russian language pluralization)
 
 == Установка
 
-Установка в качестве gem с GitHub:
+Установка в качестве gem (с GemCutter):
 
-  gem sources -a http://gems.github.com
-  gem install yaroslav-yandex_inflect
+  gem install yandex_inflect
   
 == Использование
 
@@ -31,3 +30,4 @@ Yandex.Inflect webservice client (provides Russian language pluralization)
 == Автор
 
 * Ярослав Маркин <yaroslav@markin.net>
+
