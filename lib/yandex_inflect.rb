@@ -1,3 +1,5 @@
+# -*- encoding: utf-8 -*- 
+
 $KCODE = 'u'
 
 $:.unshift(File.dirname(__FILE__)) unless
