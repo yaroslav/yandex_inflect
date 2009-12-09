@@ -2,12 +2,12 @@
 
 Gem::Specification.new do |s|
   s.name = %q{yandex_inflect}
-  s.version = "0.0.2"
+  s.version = "0.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Yaroslav Markin"]
   s.autorequire = %q{yandex_inflect}
-  s.date = %q{2009-10-09}
+  s.date = %q{2009-12-09}
   s.description = %q{Yandex.Inflect webservice client (Russian language inflection)}
   s.email = %q{yaroslav@markin.net}
   s.extra_rdoc_files = ["README.rdoc", "LICENSE", "TODO"]

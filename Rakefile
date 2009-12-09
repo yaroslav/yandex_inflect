@@ -5,7 +5,7 @@ require 'rubygems/specification'
 require 'date'
 
 GEM = "yandex_inflect"
-GEM_VERSION = "0.0.2"
+GEM_VERSION = "0.1.0"
 AUTHOR = "Yaroslav Markin"
 EMAIL = "yaroslav@markin.net"
 HOMEPAGE = "http://github.com/yaroslav/yandex_inflect/"
