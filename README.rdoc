@@ -1,5 +1,5 @@
 = YandexInflect
-{<img src="http://travis-ci.org/yaroslav/yandex_inflect.png" />}[http://travis-ci.org/yaroslav/yandex_inflect]
+{<img src="https://travis-ci.org/yaroslav/yandex_inflect.png" />}[http://travis-ci.org/yaroslav/yandex_inflect]
 
 
 Yandex.Inflect webservice client (provides Russian language pluralization)
