@@ -1,4 +1,6 @@
 = YandexInflect
+{<img src="http://travis-ci.org/yaroslav/yandex_inflect.png" />}[http://travis-ci.org/yaroslav/yandex_inflect]
+
 
 Yandex.Inflect webservice client (provides Russian language pluralization)
 
@@ -9,7 +11,7 @@ Yandex.Inflect webservice client (provides Russian language pluralization)
 
 == Установка
 
-Установка в качестве gem (с GemCutter):
+Установка в качестве gem:
 
   gem install yandex_inflect
   
@@ -26,6 +28,9 @@ Yandex.Inflect webservice client (provides Russian language pluralization)
 Успешные ответы от веб-сервиса кешируются, кеш можно очистить с помощью
 
   > YandexInflect.clear_cache
+
+Для реализации собственного механизма кеширования/хранения данных достаточно переопределить методы <tt>cache_lookup(word)</tt> и <tt>cache_store(word, value)</tt>
+
 
 == Автор
 

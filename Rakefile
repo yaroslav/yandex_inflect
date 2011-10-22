@@ -1,57 +1,10 @@
-# -*- encoding: utf-8 -*-
-
 require 'rubygems'
-require 'rake/gempackagetask'
-require 'spec/rake/spectask'
+require 'rspec/core/rake_task'
 require 'rubygems/specification'
-require 'date'
-
-GEM = "yandex_inflect"
-GEM_VERSION = "0.1.0"
-AUTHOR = "Yaroslav Markin"
-EMAIL = "yaroslav@markin.net"
-HOMEPAGE = "http://github.com/yaroslav/yandex_inflect/"
-SUMMARY = "Yandex.Inflect webservice client (Russian language inflection)"
-
-spec = Gem::Specification.new do |s|
-  s.name = GEM
-  s.version = GEM_VERSION
-  s.platform = Gem::Platform::RUBY
-  s.has_rdoc = true
-  s.extra_rdoc_files = ["README.rdoc", "LICENSE", 'TODO']
-  s.summary = SUMMARY
-  s.description = s.summary
-  s.author = AUTHOR
-  s.email = EMAIL
-  s.homepage = HOMEPAGE
-  
-  # Uncomment this to add a dependency
-  s.add_dependency "httparty"
-  
-  s.require_path = 'lib'
-  s.autorequire = GEM
-  s.files = %w(LICENSE README.rdoc Rakefile TODO init.rb) + Dir.glob("{lib,spec}/**/*")
-end
-
-Rake::GemPackageTask.new(spec) do |pkg|
-  pkg.gem_spec = spec
-end
 
 task :default => :spec
 desc "Run specs"
-Spec::Rake::SpecTask.new do |t|
-  t.spec_files = FileList['spec/**/*_spec.rb']
-  t.spec_opts = %w(-fs --color)
-end
-
-desc "install the gem locally"
-task :install => [:package] do
-  sh %{sudo gem install pkg/#{GEM}-#{GEM_VERSION}}
-end
-
-desc "create a gemspec file"
-task :make_spec do
-  File.open("#{GEM}.gemspec", "w") do |file|
-    file.puts spec.to_ruby
-  end
+RSpec::Core::RakeTask.new do |t|
+  t.pattern = FileList['spec/**/*_spec.rb']
+  t.rspec_opts = %w(-fs --color)
 end
