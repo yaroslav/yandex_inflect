@@ -1,12 +1,12 @@
-# -*- encoding: utf-8 -*- 
+# -*- encoding: utf-8 -*-
 
 require File.dirname(__FILE__) + '/spec_helper.rb'
 
 describe YandexInflect do
   before(:all) do
-    @sample_inflection = ["рубин", "рубина", "рубину", "рубин", "рубином", "рубине"]
+    @sample_inflection = ["рубин", "рубина", "рубину", "рубина", "рубином", "рубине"]
   end
-  
+
   before(:each) do
     @inflection = mock(:inflection)
     YandexInflect::clear_cache
@@ -41,23 +41,23 @@ describe YandexInflect, "with caching" do
     sample = ["рубин", "рубина", "рубину", "рубин", "рубином", "рубине"]
     @inflection.stub!(:get).and_return(sample)
     YandexInflect::Inflection.should_receive(:new).once.and_return(@inflection)
-    
+
     2.times { YandexInflect.inflections("рубин") }
   end
-  
+
   it "should NOT cache unseccussful lookups" do
     sample = nil
     @inflection.stub!(:get).and_return(sample)
     YandexInflect::Inflection.should_receive(:new).twice.and_return(@inflection)
-    
+
     2.times { YandexInflect.inflections("рубин") }
   end
-  
+
   it "should allow to clear cache" do
     sample = "рубин"
     @inflection.stub!(:get).and_return(sample)
     YandexInflect::Inflection.should_receive(:new).twice.and_return(@inflection)
-    
+
     YandexInflect.inflections("рубин")
     YandexInflect.clear_cache
     YandexInflect.inflections("рубин")
@@ -66,12 +66,18 @@ end
 
 describe YandexInflect::Inflection do
   before(:all) do
+    server_response = [{"__content__" => "рубин",   "case" => "1"},
+                       {"__content__" => "рубина",  "case" => "2"},
+                       {"__content__" => "рубину",  "case" => "3"},
+                       {"__content__" => "рубина",  "case" => "4"},
+                       {"__content__" => "рубином", "case" => "5"},
+                       {"__content__" => "рубине",  "case" => "6"}]
     @sample_answer = {
-      "inflections"=>{"inflection"=>["рубин", "рубина", "рубину", "рубин", "рубином", "рубине"], "original"=>"рубин"}
+      "inflections"=>{"inflection"=> server_response, "original"=>"рубин"}
     }
-    @sample_inflection = ["рубин", "рубина", "рубину", "рубин", "рубином", "рубине"]
+    @sample_inflection = ["рубин", "рубина", "рубину", "рубина", "рубином", "рубине"]
   end
-  
+
   it "should get inflections for a word" do
     YandexInflect::Inflection.should_receive(:get).and_return(@sample_answer)
     YandexInflect::Inflection.new.get("рубин").should == @sample_inflection
