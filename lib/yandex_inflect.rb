@@ -41,16 +41,17 @@ module YandexInflect
     return lookup if lookup
     
     get = Inflection.new.get(word) rescue nil # если поднято исключение, переходим к третьему варианту и не кешируем
+
     case get
-      when Array then 
-        # Яндекс вернул массив склонений
-        inflections = get
-        # Кладем в кеш
-        cache_store(word, inflections)
-      when String then 
+      when Hash then
         # Яндекс вернул не массив склонений (слово не найдено в словаре),
-        # а только строку, забиваем этой строкой весь массив 
-        inflections.fill(get, 0..INFLECTIONS_COUNT-1)
+        # а только строку, забиваем этой строкой весь массив.
+        # Пример: {"inflections"=>{"original"=>"whatever", "inflection"=>{"__content__"=>"whatever", "case"=>"1"}}}
+        inflections.fill(word, 0..INFLECTIONS_COUNT-1)
+        cache_store(word, inflections)
+      when Array then
+        # Яндекс вернул массив склонений
+        get.each { |h| inflections[h['case'].to_i - 1] = h['__content__'] }
         # Кладем в кеш
         cache_store(word, inflections)
       else
