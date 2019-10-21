@@ -6,7 +6,7 @@ GEM
       multi_json
       multi_xml
     multi_json (1.0.3)
-    multi_xml (0.4.1)
+    multi_xml (0.6.0)
     rake (0.9.2.2)
     rspec (2.7.0)
       rspec-core (~> 2.7.0)
